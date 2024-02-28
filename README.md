@@ -3,10 +3,10 @@
 ### D326 - Advanced Data Managment (Complete)
 - Description of task
     
-### C867 - Scripting and Programming - Applications (In Progress)
+### C867 - Scripting and Programming - Applications (Complete)
 - Description of task
     
-### C950 - Data Structures and Algorithms II (Incomplete)
+### C950 - Data Structures and Algorithms II (In-Progress)
 - Description of task
     
 ### D287 - Java Frameworks (Incomplete)
