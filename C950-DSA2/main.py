@@ -1,5 +1,6 @@
 import math
 import csv
+import hashtable
 
 #TODO:
     # [] Create hashmap
@@ -7,8 +8,6 @@ import csv
     # [] Populate hasmap with data from CSV
     # [] Create Look-up Function
     # [] Create GUI (CommandLine Interface)
-
-
 
 
 
