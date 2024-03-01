@@ -10,10 +10,10 @@ class Hashtable:
         cell = hash(key) % len(self.table)
         cell_list = self.table[cell]
 
-        for key in cell_list:
-            if key[0] == key:
-                key[1] = item
-            return True
+        for kv in cell_list:
+            if kv[0] == key:
+                kv[1] = item
+                return True
 
         key_value = [key, item]
         cell_list.append(key_value)
@@ -24,9 +24,9 @@ class Hashtable:
         cell = hash(key) % len(self.table)
         cell_list = self.table[cell]
 
-        for key_value in cell_list:
-            if key_value[0] == key:
-                return key_value[1]
+        for kv in cell_list:
+            if kv[0] == key:
+                return kv[1]
         return None
 
     # Deletes key/value from hashtable based on key hash
@@ -34,6 +34,6 @@ class Hashtable:
         cell = hash(key) % len(self.table)
         cell_list = self.table[cell]
 
-        for key in cell_list:
-            if key[0] == key:
-                cell.remove([key[0],key[1]])
+        for kv in cell_list:
+            if kv[0] == key:
+                cell.remove([kv[0],kv[1]])
