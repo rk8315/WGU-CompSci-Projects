@@ -35,4 +35,4 @@ def import_package_data(filename, package_hashtable):
 
 def print_all_packages(package_hashtable):
     for i in range(1, 41):
-        print(package_hashtable.hash_lookup(i))                
+        print(package_hashtable.hash_lookup(i)) 

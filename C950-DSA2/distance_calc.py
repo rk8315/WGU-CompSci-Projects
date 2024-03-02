@@ -34,5 +34,6 @@ def get_address(address):
 ## returns 3.0
 # test_distance = distance_between_addresses(1, 13)
 # print(test_distance)
+## Test search for address number and return its index
 # test_address = get_address("1060")
 # print(test_address)
