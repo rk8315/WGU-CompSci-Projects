@@ -1,29 +1,23 @@
-import math
-import csv
+# StudentID: 011818662
+
+from distance_calc import *
 from hashtable import *
 from package import *
+from truck import *
 
 #TODO:
     # [x] Create hashmap
-    # [] Import CSV and read/handle data within
-    # [] Populate hashmap with data from CSV
+    # [x] Import CSV and read/handle data within
+    # [x] Populate hashmap with data from CSV
     # [x] Create Look-up Function
+    # [] calculate distances, times
+    # [] Create algorithm
     # [] Create GUI (CommandLine Interface)
+    
+print("\n" + "#" * 59)
+print("# The Western Governors University Parcel Service (WGUPS) #")
+print("#" * 59 + "\n")
 
-#region Import CSV Data
-
-
-with open("C950-DSA2/Data/address_data.csv") as address_data_csv:
-    address_data = csv.reader(address_data_csv, delimiter=',')
-    # for a in address_data:
-    #     print(",".join(a))
-
-with open("C950-DSA2/Data/distance_data.csv") as distance_data_csv:
-    distance_data = csv.reader(distance_data_csv, delimiter=',')
-    # for d in distance_data:
-    #     print(",".join(d))
-
-#endregion Import CSV Data
 
 package_hashtable = Hashtable()
 

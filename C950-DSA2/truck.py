@@ -9,3 +9,4 @@ class Truck:
 
     def __str__(self):
         return "%s, %s, %s, %s, %s" % (self.capacity, self.avg_speed, self.miles_driven, self.packages, self. current_address)
+    
