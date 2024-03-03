@@ -1,7 +1,7 @@
 import csv
 
 class Package:
-    def __init__(self, ID, address, city, state, zip, deadline, weight, special, status, ):
+    def __init__(self, ID, address, city, state, zip, deadline, weight, special, status):
         self.ID = ID
         self.address = address
         self.city = city
@@ -11,9 +11,10 @@ class Package:
         self.weight = weight
         self.special = special
         self.status = status
+        self.time_delivered = None
 
     def __str__(self):
-        return "%s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.ID, self.address, self.city, self.state, self.zip, self.deadline, self.weight, self.special, self.status)
+        return "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.ID, self.address, self.city, self.state, self.zip, self.deadline, self.weight, self.special, self.status, self.time_delivered)
 
 def import_package_data(filename, package_hashtable):
     with open(filename) as package_data_csv:
