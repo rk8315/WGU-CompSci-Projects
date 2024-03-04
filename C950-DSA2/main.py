@@ -8,6 +8,7 @@ from hashtable import *
 from package import *
 from truck import *
 
+
 #TODO:
     # [x] Create hashmap
     # [x] Import CSV and read/handle data within
@@ -29,9 +30,6 @@ print("\n" + "#" * 59)
 print("# The Western Governors University Parcel Service (WGUPS) #")
 print("#" * 59 + "\n")
 
-#print_all_packages(package_hashtable)
-
-
 def deliver_packages(truck):
     on_truck = []
     for pID in truck.packages:
@@ -52,7 +50,9 @@ def deliver_packages(truck):
         #print(f"delivered {next_delivery}")
         truck.miles_driven += next_delivery_distance
         truck.current_address = next_delivery.address
-        truck.time += datetime.timedelta(hours=next_delivery / 18)
+        truck.time += datetime.timedelta(hours=next_delivery_distance / 18)
+        next_delivery.time_delivered = truck.time
+        next_delivery.time_departed = truck.time_departed
 
 
 deliver_packages(truck1)
@@ -63,3 +63,10 @@ print(f"Truck1 mileage: {truck1.miles_driven}")
 print(f"Truck2 mileage: {truck2.miles_driven}")
 print(f"Truck3 mileage: {truck3.miles_driven}")
 print(f"Total Miles Driven: {total_miles_driven}")
+
+print(f"Truck1 time departed Hub: {truck1.time_departed}")
+print(f"Truck1 time??: {truck1.time}")
+print(f"Truck2 time departed Hub: {truck2.time_departed}")
+print(f"Truck2 time??: {truck2.time}")
+print(f"Truck3 time departed Hub: {truck3.time_departed}")
+print(f"Truck3 time??: {truck3.time}")

@@ -11,6 +11,7 @@ class Package:
         self.weight = weight
         self.special = special
         self.status = status
+        self.time_departed = None
         self.time_delivered = None
 
     def __str__(self):
