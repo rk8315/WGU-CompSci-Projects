@@ -16,8 +16,6 @@ def deliver_packages(truck):
     for pID in truck.packages:
         package = package_hashtable.hash_lookup(pID)
         on_truck.append(package)
-    
-    #truck.packages.clear()
 
     # check while there are packages on the truck
     while 0 < len(on_truck): 
@@ -29,7 +27,6 @@ def deliver_packages(truck):
                 next_delivery = package
         truck.packages.append(next_delivery.ID)
         on_truck.remove(next_delivery)
-        #print(f"delivered {next_delivery}")
         truck.miles_driven += next_delivery_distance
         truck.current_address = next_delivery.address
         truck.time += datetime.timedelta(hours=next_delivery_distance / 18)

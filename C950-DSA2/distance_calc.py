@@ -24,15 +24,3 @@ def get_address(address):
         if address in row[2]:
             return int(row[0])
     
-
-
-
-
-
-## Test is distance between "Redwood Park 3060 Lester St" and "International Peace Gardens 1060 Dalton Ave S"
-## returns 3.0
-# test_distance = distance_between_addresses(1, 13)
-# print(test_distance)
-## Test search for address number and return its index
-# test_address = get_address("1060")
-# print(test_address)

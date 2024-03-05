@@ -29,7 +29,6 @@ class Package:
         else:
             self.status = "At hub"
     
-
 # Import data from CSV and turn each row into a Package Object
 def import_package_data(filename, package_hashtable):
     with open(filename) as package_data_csv:
@@ -49,7 +48,7 @@ def import_package_data(filename, package_hashtable):
             
             package_hashtable.hash_add(pID, package)
 
-# Lookup package information based on user supplied package ID and time
+# Lookup package information based on user input package ID and time
 def package_lookup(user_package_id, package_hashtable, check_time, check_truck):
     user_package = package_hashtable.hash_lookup(int(user_package_id))
     user_package.delivery_status_update(check_time, check_truck)
