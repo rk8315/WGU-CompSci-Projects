@@ -1,4 +1,5 @@
 import csv
+from truck import *
 
 class Package:
     def __init__(self, ID, address, city, state, zip, deadline, weight, special, status):
@@ -17,6 +18,17 @@ class Package:
     def __str__(self):
         return "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.ID, self.address, self.city, self.state, self.zip, self.deadline, self.weight, self.special, self.status, self.time_delivered)
 
+    # Checks the delivery status of a package compared to a time input
+    def delivery_status_update(self, check_time, check_truck):
+        truck = check_truck
+        if self.time_delivered < check_time and check_time > truck.time_departed:
+            self.status = "Delivered"
+        elif self.time_delivered > check_time and check_time > truck.time_departed:
+            self.status = "En route"
+        else:
+            self.status = "At hub"
+            
+# Import data from CSV and turn each row into a Package Object
 def import_package_data(filename, package_hashtable):
     with open(filename) as package_data_csv:
         package_data = csv.reader(package_data_csv, delimiter=',')
@@ -35,6 +47,8 @@ def import_package_data(filename, package_hashtable):
             
             package_hashtable.hash_add(pID, package)
 
+# Print all the packages that are in the hashtable
 def print_all_packages(package_hashtable):
     for i in range(1, 41):
         print(package_hashtable.hash_lookup(i)) 
+

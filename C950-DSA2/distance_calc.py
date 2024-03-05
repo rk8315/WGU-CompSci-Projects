@@ -1,5 +1,4 @@
-import csv
-import datetime
+import csv  
 
 #region CSV Imports
 with open("C950-DSA2/Data/address_data.csv") as address_data_csv:
