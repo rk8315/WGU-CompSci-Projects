@@ -42,9 +42,9 @@ import_package_data("C950-DSA2/Data/package_data.csv", package_hashtable)
 
 # Instantiate three truck objects and manually place packages into each based on 
 # special notes on packages and proximity
-truck1 = Truck(16, 18, 0.0, [ 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40], "4001 South 700 East", datetime.timedelta(hours=8)) # 14pkg leaves at 8:00am
-truck2 = Truck(16, 18, 0.0, [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 18, 25, 28, 32, 33, 36, 38], "4001 South 700 East", datetime.timedelta(hours=9, minutes=20))   # 17pkg leaves at 9:05am
-truck3 = Truck(16, 18, 0.0, [9, 12, 17, 21, 22, 23, 24, 26, 27, 35, 39], "4001 South 700 East", datetime.timedelta(hours=10, minutes=20)) # 9pkg, leaves at 10:20am
+truck1 = Truck(16, 18, 0.0, [1, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40], "4001 South 700 East", datetime.timedelta(hours=8)) # 13pkg leaves at 8:00am
+truck2 = Truck(16, 18, 0.0, [2, 3, 4, 5, 6, 7, 8, 10, 11, 18, 25, 28, 32, 33, 36, 38], "4001 South 700 East", datetime.timedelta(hours=9, minutes=20))   # 16pkg leaves at 9:05am
+truck3 = Truck(16, 18, 0.0, [9, 12, 17, 21, 22, 23, 24, 26, 27, 35, 39], "4001 South 700 East", datetime.timedelta(hours=10, minutes=20)) # 11pkg, leaves at 10:20am
 
 # Perform deliveries
 deliver_packages(truck1)
@@ -67,44 +67,48 @@ print("-" * 59 + "\n")
 
 # Ask user to search for individual packages or all
 print("Select delivery status view:")
-print("1. Individual Package status (Package ID)")
-print("2. View all package/truck status")
+print("  1. Individual Package status (Package ID)")
+print("  2. View all package/truck status in a timeframe")
 user_view_input = input("\t")
 
-# Ask user to provide time to filter by
-print("Define a time to filter delivery status (HH:MM:SS)")
-user_time_input = input("\t")
-(hour, minute, second) = user_time_input.split(":")
-check_time = datetime.timedelta(hours=int(hour), minutes=int(minute),seconds=int(second))
-
 if user_view_input == "1":
-    user_package_id = input("Enter the Package ID to lookup: ")
-    user_package = package_hashtable.hash_lookup(int(user_package_id))
+    print("Enter the Package ID to lookup: ")
+    user_package_id = input("\t")
+
+    print("Define a time to filter delivery status (HH:MM:SS)")
+    user_time_input = input("\t")
+    (hour, minute, second) = user_time_input.split(":")
+    check_time = datetime.timedelta(hours=int(hour), minutes=int(minute),seconds=int(second))
+
     # Verify which truck package is in to update status At hub, en route, delivered
-    if (user_package) in truck1.packages:
+    if (user_package_id) in truck1.packages:
         check_truck = truck1
-    elif int(user_package) in truck2.packages:
+    elif int(user_package_id) in truck2.packages:
         check_truck = truck2
     elif int(user_package_id) in truck3.packages:
-        check_truck = truck3    
-    user_package.delivery_status_update(check_time, check_truck)
-    print(str(user_package))
+        check_truck = truck3
+
+    package_lookup(user_package_id, package_hashtable, check_time, check_truck )   
+
 elif user_view_input == "2":
-    pass
+    print("Define a start time to filter delivery status (HH:MM:SS)")
+    check_start_time = input("\t")
+    (startHour, startMinute, startSecond) = check_start_time.split(":")
+    check_start_time = datetime.timedelta(hours=int(startHour), minutes=int(startMinute),seconds=int(startSecond))
+
+    print("Define a end time to filter delivery status (HH:MM:SS)")
+    check_end_time = input("\t")
+    (endHour, endMinute, endSecond) = check_end_time.split(":")
+    check_end_time = datetime.timedelta(hours=int(endHour), minutes=int(endMinute),seconds=int(endSecond))
+
+    print(f"Delivery Status for {check_start_time} - {check_end_time}")
+    print(f"Truck1")
+    print_all_packages_timeframe(check_end_time,truck1,package_hashtable)
+    print(f"\nTruck2")
+    print_all_packages_timeframe(check_end_time, truck2, package_hashtable)
+    print(f"\nTruck3")
+    print_all_packages_timeframe(check_end_time, truck3, package_hashtable)
+
 else:
     print("Invalid input, run program again")
 
-
-
-
-
-
-
-
-
-# print(f"Truck1 time departed Hub: {truck1.time_departed}")
-# print(f"Truck1 time??: {truck1.time}")
-# print(f"Truck2 time departed Hub: {truck2.time_departed}")
-# print(f"Truck2 time??: {truck2.time}")
-# print(f"Truck3 time departed Hub: {truck3.time_departed}")
-# print(f"Truck3 time??: {truck3.time}")

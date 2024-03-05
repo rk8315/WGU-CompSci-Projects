@@ -1,5 +1,6 @@
 import csv
 from truck import *
+from hashtable import *
 
 class Package:
     def __init__(self, ID, address, city, state, zip, deadline, weight, special, status):
@@ -27,7 +28,8 @@ class Package:
             self.status = "En route"
         else:
             self.status = "At hub"
-            
+    
+
 # Import data from CSV and turn each row into a Package Object
 def import_package_data(filename, package_hashtable):
     with open(filename) as package_data_csv:
@@ -47,8 +49,24 @@ def import_package_data(filename, package_hashtable):
             
             package_hashtable.hash_add(pID, package)
 
-# Print all the packages that are in the hashtable
-def print_all_packages(package_hashtable):
-    for i in range(1, 41):
-        print(package_hashtable.hash_lookup(i)) 
+# Lookup package information based on user supplied package ID and time
+def package_lookup(user_package_id, package_hashtable, check_time, check_truck):
+    user_package = package_hashtable.hash_lookup(int(user_package_id))
+    user_package.delivery_status_update(check_time, check_truck)
+    print(f"Package {user_package_id} Details:")
+    print(f"\tDelivery Address: {user_package.address} {user_package.city} {user_package.state} {user_package.zip}")
+    print(f"\tDelivery Deadline: {user_package.deadline}")
+    print(f"\tPackage Weight: {user_package.weight}")
+    print(f"\tDelivery Status: {user_package.status}")
+    if user_package.status == "Delivered":
+        print(f"\tTime Delivered: {user_package.time_delivered}")
 
+# Print all the packages that are in the hashtable
+def print_all_packages_timeframe(end_time, truck_num, package_hashtable):
+    for package in truck_num.packages:
+        package = package_hashtable.hash_lookup(package)
+        package.delivery_status_update(end_time, truck_num)
+        if package.status == "Delivered":
+            print(f"|Package {package.ID} | {package.status} | {package.time_delivered}|")
+        else:
+            print(f"|Package {package.ID} | {package.status}|")
