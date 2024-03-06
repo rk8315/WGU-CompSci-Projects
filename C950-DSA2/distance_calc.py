@@ -11,6 +11,7 @@ with open("C950-DSA2/Data/distance_data.csv") as distance_data_csv:
 #endregion CSV Imports
 
 # Find and return distance between two addresses from the distance CSV
+# Complexity O(1)
 def distance_between_addresses(x, y):
     distance = distance_data[x][y]
     if distance == '':
@@ -19,6 +20,7 @@ def distance_between_addresses(x, y):
     return float(distance)
 
 # Get an address as int from a given address from address CSV
+# Complexity O(n)
 def get_address(address):
     for row in address_data:
         if address in row[2]:

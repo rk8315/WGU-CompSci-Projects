@@ -20,6 +20,7 @@ class Package:
         return "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (self.ID, self.address, self.city, self.state, self.zip, self.deadline, self.weight, self.special, self.status, self.time_delivered)
 
     # Checks the delivery status of a package compared to a time input
+    # Complexity O(1)
     def delivery_status_update(self, check_time, check_truck):
         truck = check_truck
         if self.time_delivered < check_time and check_time > truck.time_departed:
@@ -29,7 +30,8 @@ class Package:
         else:
             self.status = "At hub"
     
-# Import data from CSV and turn each row into a Package Object
+# Import data from CSV and turn each row into a Package Object 
+# Complexity O(n)
 def import_package_data(filename, package_hashtable):
     with open(filename) as package_data_csv:
         package_data = csv.reader(package_data_csv, delimiter=',')
@@ -49,6 +51,7 @@ def import_package_data(filename, package_hashtable):
             package_hashtable.hash_add(pID, package)
 
 # Lookup package information based on user input package ID and time
+# Complexity O(n)
 def package_lookup(user_package_id, package_hashtable, check_time, check_truck):
     user_package = package_hashtable.hash_lookup(int(user_package_id))
     user_package.delivery_status_update(check_time, check_truck)
@@ -61,11 +64,12 @@ def package_lookup(user_package_id, package_hashtable, check_time, check_truck):
         print(f"\tTime Delivered: {user_package.time_delivered}")
 
 # Print all the packages that are in the hashtable
+# Complexity O(n)
 def print_all_packages_timeframe(end_time, truck_num, package_hashtable):
     for package in truck_num.packages:
         package = package_hashtable.hash_lookup(package)
         package.delivery_status_update(end_time, truck_num)
         if package.status == "Delivered":
-            print(f"|Package {package.ID} | {package.status} | {package.time_delivered}|")
+            print(f"| Package {package.ID} | {package.status} | {package.time_delivered} |")
         else:
-            print(f"|Package {package.ID} | {package.status}|")
+            print(f"| Package {package.ID} | {package.status} |")

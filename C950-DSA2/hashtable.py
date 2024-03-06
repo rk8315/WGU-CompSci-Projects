@@ -6,6 +6,7 @@ class Hashtable:
             self.table.append([])
 
     # Adds new items to hashtable, checks for existing key to update
+    # Complexity O(n)
     def hash_add(self, key, item):
         cell = hash(key) % len(self.table)
         cell_list = self.table[cell]
@@ -20,6 +21,7 @@ class Hashtable:
         return True
 
     # Searches hashtable based on key, returns value if exists or return None
+    # Complexity O(n)
     def hash_lookup(self, key):
         cell = hash(key) % len(self.table)
         cell_list = self.table[cell]
@@ -30,6 +32,7 @@ class Hashtable:
         return None
 
     # Deletes key/value from hashtable based on key hash
+    # Complexity O(n)
     def hash_delete(self, key):
         cell = hash(key) % len(self.table)
         cell_list = self.table[cell]
