@@ -19,6 +19,8 @@ def deliver_packages(truck):
         package = package_hashtable.hash_lookup(pID)
         on_truck.append(package)
 
+    truck.packages.clear()
+
     # Check while there are packages on the truck, perform delivery by calculating distance/time and removing delivered packages
     while 0 < len(on_truck): 
         # set a initial value that all packages is less than
