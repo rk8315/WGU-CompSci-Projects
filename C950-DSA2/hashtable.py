@@ -1,3 +1,7 @@
+# CITATION: 
+    # C950-Webinar-1-Let's Go Hashing 
+    # W-1_ChainingHashTable_zyBooks_Key-Value.py
+    # Ref: zyBooks: Figure 7.8.2: Hash table using chaining.
 class Hashtable:
     # Constructor for hashtable, establish size of 10 cells
     def __init__(self, size=10):

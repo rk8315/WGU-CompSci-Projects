@@ -73,7 +73,7 @@ print("-" * 59 + "\n")
 # Ask user to search for individual packages or all
 print("Select delivery status view:")
 print("(1) Individual Package status (Package ID)")
-print("(2) View all package/truck status in a timeframe")
+print("(2) View all package/truck status in at a specific time")
 user_view_input = input("\t")
 
 if user_view_input == "1":
@@ -97,25 +97,19 @@ if user_view_input == "1":
     package_lookup(user_package_id, package_hashtable, check_time, check_truck )   
 
 elif user_view_input == "2":
-    print("Define a start time to filter delivery status (HH:MM:SS)")
-    check_start_time = input("\t")
-    (startHour, startMinute, startSecond) = check_start_time.split(":")
-    check_start_time = datetime.timedelta(hours=int(startHour), minutes=int(startMinute),seconds=int(startSecond))
-
-    print("Define a end time to filter delivery status (HH:MM:SS)")
-    check_end_time = input("\t")
-    (endHour, endMinute, endSecond) = check_end_time.split(":")
-    check_end_time = datetime.timedelta(hours=int(endHour), minutes=int(endMinute),seconds=int(endSecond))
+    print("Define a time to filter delivery status (HH:MM:SS)")
+    check_time = input("\t")
+    (cHour, cMinute, cSecond) = check_time.split(":")
+    check_time = datetime.timedelta(hours=int(cHour), minutes=int(cMinute),seconds=int(cSecond))
 
     # Calculate and print delivery status of each package based on user input time
-    print(f"Delivery Status for {check_start_time} - {check_end_time}")
+    print(f"Delivery Status for {check_time}")
     print(f"Truck1")
-    print_all_packages_timeframe(check_end_time,truck1,package_hashtable)
+    print_all_packages_timeframe(check_time,truck1,package_hashtable)
     print(f"\nTruck2")
-    print_all_packages_timeframe(check_end_time, truck2, package_hashtable)
+    print_all_packages_timeframe(check_time, truck2, package_hashtable)
     print(f"\nTruck3")
-    print_all_packages_timeframe(check_end_time, truck3, package_hashtable)
+    print_all_packages_timeframe(check_time, truck3, package_hashtable)
 
 else:
     print("Invalid input, run program again")
-
