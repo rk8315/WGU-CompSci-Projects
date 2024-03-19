@@ -6,7 +6,7 @@
 ### C867 - Scripting and Programming - Applications (Complete)
 - Description of task
     
-### C950 - Data Structures and Algorithms II (In-Progress)
+### C950 - Data Structures and Algorithms II (Complete)
 - Description of task
     
 ### D287 - Java Frameworks (Incomplete)
