@@ -29,6 +29,10 @@ def deliver_packages(truck):
 
         # find the package that has the least amount of distance from trucks current location
         for package in on_truck:
+            # Update the package with wrong address to correct address if truck departure time is greater than time package address was updated
+            if "Wrong" in package.special and truck.time > datetime.timedelta(hours=10, minutes=20):
+                package.address = "410 S State St"
+                package.zip = "84111"
             if distance_between_addresses(get_address(truck.current_address), get_address(package.address)) < next_delivery_distance:
                 next_delivery_distance = distance_between_addresses(get_address(truck.current_address), get_address(package.address))
                 next_delivery = package
@@ -44,7 +48,7 @@ def deliver_packages(truck):
 
 # Instantiate a Hashtable object and populate it with Package objects from the package data CSV
 package_hashtable = Hashtable()
-import_package_data("C950-DSA2/Data/package_data.csv", package_hashtable)
+import_package_data(package_hashtable)
 
 # Instantiate three Truck objects and manually place packages into each based on special notes on packages and proximity
 truck1 = Truck(16, 18, 0.0, [1, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40], "4001 South 700 East", datetime.timedelta(hours=8)) # 13pkg leaves at 8:00am
@@ -86,7 +90,7 @@ if user_view_input == "1":
     check_time = datetime.timedelta(hours=int(hour), minutes=int(minute),seconds=int(second))
 
     # Verify which truck a package is in to update the status if At hub, en route, or delivered
-    if (user_package_id) in truck1.packages:
+    if int(user_package_id) in truck1.packages:
         check_truck = truck1
     elif int(user_package_id) in truck2.packages:
         check_truck = truck2

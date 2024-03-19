@@ -1,4 +1,5 @@
 import csv
+import os
 from truck import *
 from hashtable import *
 
@@ -32,8 +33,11 @@ class Package:
     
 # Import data from CSV and turn each row into a Package Object 
 # Complexity O(n)
-def import_package_data(filename, package_hashtable):
-    with open(filename) as package_data_csv:
+def import_package_data(package_hashtable):
+    current_dir = os.getcwd()
+    package_data_csv = 'package_data.csv'
+    package_file_path = os.path.join(current_dir, package_data_csv)
+    with open(package_file_path) as package_data_csv:
         package_data = csv.reader(package_data_csv, delimiter=',')
         for package in package_data:
             pID = int(package[0])
@@ -55,8 +59,16 @@ def import_package_data(filename, package_hashtable):
 def package_lookup(user_package_id, package_hashtable, check_time, check_truck):
     user_package = package_hashtable.hash_lookup(int(user_package_id))
     user_package.delivery_status_update(check_time, check_truck)
+    
+    # Change address of package 9 with wrong address to correct address depending on time user enters compared to when truck departs.
+    if "Wrong" in user_package.special and check_time < check_truck.time_departed:
+        user_package.address = "300 State St"
+        user_package.zip = "84103"
+    elif "Wrong" in user_package.special and check_time >= check_truck.time_departed:
+        user_package.address = "410 S State St"
+        user_package.zip = "84111"
     print(f"Package {user_package_id} Details:")
-    print(f"\tDelivery Address: {user_package.address} {user_package.city} {user_package.state} {user_package.zip}")
+    print(f"\tDelivery Address: {user_package.address}, {user_package.city}, {user_package.state} {user_package.zip}")
     print(f"\tDelivery Deadline: {user_package.deadline}")
     print(f"\tPackage Weight: {user_package.weight}")
     print(f"\tDelivery Status: {user_package.status}")
