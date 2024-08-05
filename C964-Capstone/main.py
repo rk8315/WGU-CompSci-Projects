@@ -7,7 +7,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from math import sqrt
-import numpy as np
 
 #endregion Environment Setup
 
@@ -105,8 +104,33 @@ plt.show()
 
 #region Forecast Energy Consumption
 
+date_selection = "09/15/2024"
+date_selected = date_selection.split("/")
+
+#24 hours of a future date
+forecast_energy_data = pd.DataFrame({
+    'hour': [i for i in range(24)],
+    'day': [date_selected[1]]*24,
+    'month': [date_selected[0]]*24,
+    'year': [date_selected[2]]*24
+})
+
+forecast_energy_model = rfr_model.predict(forecast_energy_data)
+
+forecast_energy_data['PJME_MW'] = forecast_energy_model
+
+print(f"Forecast data: {forecast_energy_data}")
+
 #endregion Forecast Energy Consumption
 
 #region Visualize Forecast Data
+
+plt.figure(figsize=(14, 10))
+sns.lineplot(x=forecast_energy_data.index, y=forecast_energy_data['PJME_MW'])
+plt.title(f"Energy Consumption Forecast for Date: {date_selection}")
+plt.xlabel("Hour")
+plt.ylabel("Energy Consumption (MW)")
+
+plt.show()
 
 #endregion Visualize Forecast Data
