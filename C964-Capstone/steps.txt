@@ -1,0 +1,14 @@
+ENVIRONMENT SETUP
+    - pip install pandas
+        gets pandas and numpy
+    - pip install scikit-learn
+        gets scikit-learn
+
+DATA PREP
+    - Handle missing values by filling it with a mean value of dataset.
+    - Extract additional features from Datetime
+    - Split data into features (Datetime) and targets (PJME_MW)
+        x_train: The training set features.
+        x_test: The test set features.
+        y_train: The training set targets.
+        y_test: The test set targets.
