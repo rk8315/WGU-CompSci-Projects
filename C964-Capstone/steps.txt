@@ -4,6 +4,8 @@ ENVIRONMENT SETUP
     gets pandas and numpy
 - pip install scikit-learn
     gets scikit-learn
+- pip install matplotlib
+- pip install seaborn
 
 DATA PREPARATION
 - Handle missing values by filling it with a mean value of dataset.

@@ -1,8 +1,9 @@
 #region Environment Setup
 
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from math import sqrt
@@ -69,6 +70,36 @@ print(f"Root Mean Squared Error (RMSE): {rmse}. Percentage error: {rmse_max_perc
 #endregion Model Evaluation
 
 #region Visualize Existing Data
+
+# Create subplots for graphing
+fig, axes = plt.subplots(2, 2, figsize=(14, 10), layout="constrained")
+
+# lineplot
+sns.lineplot(ax=axes[0,0], x=energy_data.index, y='PJME_MW', data=energy_data)
+axes[0,0].set_title("Historical Energy Consumption Over Time (PJME)")
+axes[0,0].set_xlabel("Date")
+axes[0,0].set_ylabel("Energy Consumption (MW)")
+
+# Heatmap
+pivot_table = energy_data.pivot_table(values='PJME_MW', index='hour', columns='day', aggfunc='mean')
+sns.heatmap(ax=axes[0,1], data=pivot_table, cmap='viridis')
+axes[0,1].set_title("Average Energy Consumption by Hour and Day (PJME)")
+axes[0,1].set_xlabel("Day")
+axes[0,1].set_ylabel("Hour")
+
+# Boxplot
+sns.boxplot(ax=axes[1,0], x='month', y='PJME_MW', data=energy_data)
+axes[1,0].set_title("Distribution of Energy Consumption - Monthly (PJME)")
+axes[1,0].set_xlabel("Month")
+axes[1,0].set_ylabel("Energy Consumption (MW)")
+
+# Scatterplot
+sns.scatterplot(ax=axes[1,1], x='hour', y='PJME_MW', data=energy_data, alpha=0.5)
+axes[1,1].set_title("Energy Consumption - Hourly (PJME)")
+axes[1,1].set_xlabel("Hour")
+axes[1,1].set_ylabel("Energy Consumption (MW)")
+
+plt.show()
 
 #endregion Visualize Existing Data
 
