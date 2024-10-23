@@ -2,7 +2,14 @@
 
 ## C964 - Computer Science Capstone
 ### Description
-Write-up in progress.
+Project purpose and goals:
+Determine historical trends using energy consumption data and provide a forecast of energy consumption for a given area. This analysis would be beneficial to a municipality or energy-based company to reduce operational cost and optimize energy distribution of an area.
+The goals of this project included:
+- Provide a user interface that will be able to ingest an energy consumption dataset
+- Identify trends within the data and output a visualization of the data through graphs such as line charts, heat maps, scatter plots, and bar charts.
+- Provide a forecast of energy consumption based on the data that is ingested and toggle various time periods.
+
+I was able to perform model training on historical energy consumption data to then predict future energy consumption. This sort of method would be best to optimize the energy distribution for an area through predictive insights.
 
 ### Capstone Excellence Award
 My capstone was nominated by a WGU Evaluation faculty member for special recognition due to the exceptional nature of the project. Notes from the evaluator include "The project proposal is thorough and clear, especially the Implementation, Evaluation Plan, and Resources and Costs sections. The user guide is comprehensive, and the Random Forest Regressor model is fully functional, well-commented, and easy to understand and use."
